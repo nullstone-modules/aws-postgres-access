@@ -1,13 +1,14 @@
 data "aws_lambda_invocation" "create-user" {
-  function_name = data.ns_connection.postgres.outputs.lambda_function_name
+  function_name = data.ns_connection.postgres.outputs.db_admin_function_name
 
-  input = sensitive(jsonencode({
+  // TODO: Wrap with sensitive when upgraded to TF 0.15
+  input = jsonencode({
     type = "create-user"
     metadata = {
       username = local.username
       password = random_password.this.result
     }
-  }))
+  })
 }
 
 data "aws_lambda_invocation" "create-database" {
