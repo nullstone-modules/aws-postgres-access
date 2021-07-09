@@ -9,14 +9,8 @@ terraform {
 data "ns_workspace" "this" {}
 
 data "ns_connection" "postgres" {
-  name = "postgres"
-  type = "postgres/aws-rds"
-}
-
-data "ns_connection" "network" {
-  name = "network"
-  type = "network/aws"
-  via  = data.ns_connection.postgres.name
+  name       = "postgres"
+  type       = "postgres/aws-rds"
 }
 
 locals {
