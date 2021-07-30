@@ -14,7 +14,7 @@ output "env" {
     },
     {
       name  = "POSTGRES_DB"
-      value = var.database_name
+      value = local.database_name
     }
   ]
 }

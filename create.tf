@@ -17,7 +17,7 @@ data "aws_lambda_invocation" "create-database" {
   input = jsonencode({
     type = "create-database"
     metadata = {
-      databaseName = var.database_name
+      databaseName = local.database_name
       owner        = local.username
     }
   })
