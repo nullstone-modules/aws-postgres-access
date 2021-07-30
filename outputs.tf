@@ -1,9 +1,11 @@
 output "security_group_rules" {
-  value = {
-    id       = local.db_security_group_id
-    protocol = "tcp"
-    port     = local.db_port
-  }
+  value = [
+    {
+      id       = local.db_security_group_id
+      protocol = "tcp"
+      port     = local.db_port
+    }
+  ]
 }
 
 output "env" {
