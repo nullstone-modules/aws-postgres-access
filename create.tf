@@ -17,8 +17,8 @@ data "aws_lambda_invocation" "create-user" {
   input = jsonencode({
     type = "create-user"
     metadata = {
-      username     = local.username
-      password     = random_password.this.result
+      username = local.username
+      password = random_password.this.result
     }
   })
 
