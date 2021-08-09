@@ -8,6 +8,6 @@ resource "random_string" "resource_suffix" {
 
 locals {
   resource_name = "${data.ns_workspace.this.block_ref}-${random_string.resource_suffix.result}"
-  username      = data.ns_workspace.this.block_ref
+  username      = local.resource_name
   database_name = coalesce(var.database_name, data.ns_workspace.this.block_name)
 }
