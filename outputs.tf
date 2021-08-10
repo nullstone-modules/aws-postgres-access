@@ -14,12 +14,12 @@ output "env" {
 output "secrets" {
   value = [
     {
-      name      = "POSTGRES_PASSWORD"
-      valueFrom = aws_secretsmanager_secret.password.arn
+      name  = "POSTGRES_PASSWORD"
+      value = random_password.this.result
     },
     {
-      name      = "POSTGRES_URL"
-      valueFrom = aws_secretsmanager_secret.url.arn
+      name  = "POSTGRES_URL"
+      value = "postgres://${urlencode(local.username)}:${urlencode(random_password.this.result)}@${local.db_endpoint}/${urlencode(local.database_name)}"
     }
   ]
 }
