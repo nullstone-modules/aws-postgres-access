@@ -6,13 +6,3 @@ resource "random_password" "this" {
   // The password for the master database user can include any printable ASCII character except /, ", @, or a space.
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
-
-resource "aws_secretsmanager_secret" "password" {
-  name = "${local.resource_name}/password"
-  tags = data.ns_workspace.this.tags
-}
-
-resource "aws_secretsmanager_secret_version" "password" {
-  secret_id     = aws_secretsmanager_secret.password.id
-  secret_string = random_password.this.result
-}
