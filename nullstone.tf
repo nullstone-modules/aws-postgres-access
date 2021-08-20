@@ -10,7 +10,7 @@ data "ns_workspace" "this" {}
 
 data "ns_connection" "postgres" {
   name = "postgres"
-  type = "postgres/aws-rds"
+  type = "postgres/aws"
 }
 
 locals {

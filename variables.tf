@@ -10,6 +10,6 @@ EOF
 
 variable "database_name" {
   type        = string
-  description = "Name of database to create in Postgres cluster"
+  description = "Name of database to create in Postgres cluster. If left blank, uses app name."
   default     = ""
 }
