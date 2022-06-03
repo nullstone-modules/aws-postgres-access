@@ -4,5 +4,6 @@ resource "random_password" "this" {
   special = true
 
   // The password for the master database user can include any printable ASCII character except /, ", @, or a space.
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  // '%' is an acceptable character but causes confusion with url encoding, let's drop it
+  override_special = "!#$&*()-_=+[]{}<>:?"
 }

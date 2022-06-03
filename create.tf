@@ -1,7 +1,7 @@
 // Create Database will create a database
 // Additionally, a role of the same name will be created and given "owner" over database
 data "aws_lambda_invocation" "create-database" {
-  function_name = data.ns_connection.postgres.outputs.db_admin_function_name
+  function_name = local.db_admin_func_name
 
   input = jsonencode({
     type = "create-database"
@@ -12,7 +12,7 @@ data "aws_lambda_invocation" "create-database" {
 }
 
 data "aws_lambda_invocation" "create-user" {
-  function_name = data.ns_connection.postgres.outputs.db_admin_function_name
+  function_name = local.db_admin_func_name
 
   input = jsonencode({
     type = "create-user"
@@ -26,7 +26,7 @@ data "aws_lambda_invocation" "create-user" {
 }
 
 data "aws_lambda_invocation" "create-db-access" {
-  function_name = data.ns_connection.postgres.outputs.db_admin_function_name
+  function_name = local.db_admin_func_name
 
   input = jsonencode({
     type = "create-db-access"
