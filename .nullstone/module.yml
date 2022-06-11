@@ -2,12 +2,14 @@ org_name: nullstone
 name: aws-postgres-access
 friendly_name: Postgres Access
 description: Grants an application access to a newly-created postgres database managed by AWS
-category: capability/datastores
-type: capability/postgres-access/aws
-appCategories:
-    - app/container
-    - app/serverless
-layer: service
-is_public: true
+category: capability
+subcategory: datastores
 provider_types:
     - aws
+platform: postgres
+subplatform: ""
+type: capability/postgres-access/aws
+appCategories:
+    - container
+    - serverless
+is_public: true

@@ -1,6 +1,7 @@
 data "ns_connection" "postgres" {
-  name = "postgres"
-  type = "postgres/aws"
+  name     = "postgres"
+  type     = "postgres/aws"
+  contract = "datastore/aws/postgres:*"
 }
 
 locals {

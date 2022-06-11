@@ -23,7 +23,7 @@ jobs:
 
       # Package files into tgz
       - name: Package
-        run: tar -cvzf module.tgz *.tf
+        run: tar -cvzf module.tgz *.tf README.md
 
       # Publish to nullstone
       - name: Publish
