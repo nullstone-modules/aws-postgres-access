@@ -1,6 +1,10 @@
 output "env" {
   value = [
     {
+      name  = "POSTGRES_HOST"
+      value = local.db_subdomain
+    },
+    {
       name  = "POSTGRES_USER"
       value = local.username
     },
