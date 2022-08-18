@@ -1,40 +1,43 @@
+provider "restapi" {
+  uri                  =  local.db_admin_func_url
+  write_returns_object = true
+
+  aws_v4_signing {
+    service = "lambda-url"
+  }
+}
+
 // Create Database will create a database
 // Additionally, a role of the same name will be created and given "owner" over database
-data "aws_lambda_invocation" "create-database" {
-  function_name = local.db_admin_func_name
+resource "restapi_object" "database" {
+  path         = "/databases"
+  id_attribute = "name"
 
-  input = jsonencode({
-    type = "create-database"
-    metadata = {
-      databaseName = local.database_name
-    }
+  data = jsonencode({
+    name = local.database_name
   })
 }
 
-data "aws_lambda_invocation" "create-user" {
-  function_name = local.db_admin_func_name
+resource "restapi_object" "user" {
+  path         = "/users"
+  id_attribute = "name"
 
-  input = jsonencode({
-    type = "create-user"
-    metadata = {
-      username = local.username
-      password = random_password.this.result
-    }
+  data = jsonencode({
+    name     = local.username
+    password = random_password.this.result
   })
-
-  depends_on = [data.aws_lambda_invocation.create-database]
 }
 
-data "aws_lambda_invocation" "create-db-access" {
-  function_name = local.db_admin_func_name
+resource "restapi_object" "user_access" {
+  path = "/user_access"
 
-  input = jsonencode({
-    type = "create-db-access"
-    metadata = {
-      databaseName = local.database_name
-      username     = local.username
-    }
+  data = jsonencode({
+    databaseName = local.database_name
+    username     = local.username
   })
 
-  depends_on = [data.aws_lambda_invocation.create-user]
+  depends_on = [
+    restapi_object.database,
+    restapi_object.user
+  ]
 }
