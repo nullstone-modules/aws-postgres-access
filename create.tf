@@ -3,7 +3,7 @@ provider "restapi" {
   write_returns_object = true
 
   aws_v4_signing {
-    service = "lambda-url"
+    service = "lambda"
   }
 }
 
@@ -14,7 +14,8 @@ resource "restapi_object" "database" {
   id_attribute = "name"
 
   data = jsonencode({
-    name = local.database_name
+    name        = local.database_name
+    skipDestroy = true
   })
 }
 
@@ -23,8 +24,9 @@ resource "restapi_object" "user" {
   id_attribute = "name"
 
   data = jsonencode({
-    name     = local.username
-    password = random_password.this.result
+    name        = local.username
+    password    = random_password.this.result
+    skipDestroy = true
   })
 }
 
@@ -34,6 +36,7 @@ resource "restapi_object" "user_access" {
   data = jsonencode({
     databaseName = local.database_name
     username     = local.username
+    skipDestroy  = true
   })
 
   depends_on = [
