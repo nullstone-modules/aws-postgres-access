@@ -18,4 +18,5 @@ data "aws_lambda_function_url" "db_admin" {
 locals {
   db_admin_func_name = data.ns_connection.postgres.outputs.db_admin_function_name
   db_admin_func_url  = data.aws_lambda_function_url.db_admin.function_url
+  db_admin_invoker   = data.ns_connection.postgres.outputs.db_admin_invoker
 }

@@ -1,9 +1,11 @@
 provider "restapi" {
-  uri                  =  local.db_admin_func_url
+  uri                  = local.db_admin_func_url
   write_returns_object = true
 
   aws_v4_signing {
-    service = "lambda"
+    service           = "lambda"
+    access_key_id     = try(local.db_admin_invoker["access_key"], null)
+    secret_access_key = try(local.db_admin_invoker["secret_key"], null)
   }
 }
 
