@@ -41,17 +41,19 @@ resource "restapi_object" "role" {
   data = jsonencode({
     name        = local.username
     password    = random_password.this.result
+    useExisting = true
     skipDestroy = true
   })
 }
 
 resource "restapi_object" "role_member" {
-  path         = "/roles/${local.database_owner}/members/${local.username}"
-  id_attribute = "id"
+  path         = "/roles/${local.database_owner}/members"
+  id_attribute = "member"
 
   data = jsonencode({
-    member      = local.username
     target      = local.database_owner
+    member      = local.username
+    useExisting = true
     skipDestroy = true
   })
 
@@ -82,10 +84,10 @@ resource "restapi_object" "default_grants" {
   id_attribute = "id"
 
   data = jsonencode({
-    role         = local.username
-    target       = local.database_owner
-    databaseName = local.database_name
-    skipDestroy  = true
+    role        = local.username
+    target      = local.database_owner
+    database    = local.database_name
+    skipDestroy = true
   })
 
   depends_on = [
