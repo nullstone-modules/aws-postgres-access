@@ -12,11 +12,13 @@ locals {
 }
 
 data "aws_lambda_function_url" "db_admin" {
+  count         = local.db_admin_v5 ? 1 : 0
   function_name = local.db_admin_func_name
 }
 
 locals {
   db_admin_func_name = data.ns_connection.postgres.outputs.db_admin_function_name
-  db_admin_func_url  = data.aws_lambda_function_url.db_admin.function_url
-  db_admin_invoker   = data.ns_connection.postgres.outputs.db_admin_invoker
+  db_admin_invoker   = try(data.ns_connection.postgres.outputs.db_admin_invoker, null)
+  db_admin_v5        = local.db_admin_invoker != null
+  db_admin_func_url  = local.db_admin_v5 ? data.aws_lambda_function_url.db_admin[0].function_url : ""
 }
