@@ -1,5 +1,5 @@
 provider "restapi" {
-  uri                  = local.db_admin_func_url
+  uri                  = coalesce(local.db_admin_func_url, "https://noop")
   write_returns_object = true
 
   aws_v4_signing {
