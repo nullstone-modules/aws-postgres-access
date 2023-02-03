@@ -1,6 +1,7 @@
 provider "restapi" {
   uri                  = coalesce(local.db_admin_func_url, "https://noop")
   write_returns_object = true
+  rate_limit           = 2 // Allow 2 requests per second
 
   aws_v4_signing {
     service           = "lambda"
