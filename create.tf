@@ -1,5 +1,5 @@
 provider "restapi" {
-  uri                  = coalesce(local.db_admin_func_url, "https://noop")
+  uri                  = coalesce(local.db_admin_func_url, "https://missing-db-admin-url")
   write_returns_object = true
   rate_limit           = 2 // Allow 2 requests per second
 
