@@ -1,7 +1,7 @@
 // Create Database will create a database
 // Additionally, a role of the same name will be created and given "owner" over database
 data "aws_lambda_invocation" "create-database" {
-  count         = local.db_admin_v5 ? 0 : 1
+  count = local.db_admin_v5 ? 0 : 1
 
   function_name = local.db_admin_func_name
 
@@ -14,7 +14,7 @@ data "aws_lambda_invocation" "create-database" {
 }
 
 data "aws_lambda_invocation" "create-user" {
-  count         = local.db_admin_v5 ? 0 : 1
+  count = local.db_admin_v5 ? 0 : 1
 
   function_name = local.db_admin_func_name
 
@@ -30,7 +30,7 @@ data "aws_lambda_invocation" "create-user" {
 }
 
 data "aws_lambda_invocation" "create-db-access" {
-  count         = local.db_admin_v5 ? 0 : 1
+  count = local.db_admin_v5 ? 0 : 1
 
   function_name = local.db_admin_func_name
 
