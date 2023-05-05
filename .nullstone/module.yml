@@ -12,4 +12,5 @@ type: capability/postgres-access/aws
 appCategories:
     - container
     - serverless
+    - server
 is_public: true
