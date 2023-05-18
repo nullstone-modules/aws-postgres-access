@@ -1,3 +1,10 @@
+# 0.5.5 (May 18, 2023)
+* Added support for interpolating `database_name` with `{{ NULLSTONE_STACK}}`, `{{ NULLSTONE_STACK}}`, and `{{ NULLSTONE_ENV }}`.
+* Added `server` to list of supported app categories.
+
+# 0.5.5 (Apr 21 2023)
+* Added overview and troubleshooting to `README.md`.
+
 # 0.5.4 (Mar 15, 2023)
 * Fix issues with database access when changing `database_name` after initial launch. 
 
