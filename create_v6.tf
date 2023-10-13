@@ -1,3 +1,7 @@
+locals {
+  is_v0_6 = local.db_admin_version == "0.6"
+}
+
 provider "restapi" {
   uri                  = coalesce(local.db_admin_func_url, "https://missing-db-admin-url")
   write_returns_object = true
@@ -11,7 +15,7 @@ provider "restapi" {
 }
 
 resource "restapi_object" "database_owner" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/roles"
   id_attribute = "name"
@@ -26,7 +30,7 @@ resource "restapi_object" "database_owner" {
 }
 
 resource "restapi_object" "database" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/databases"
   id_attribute = "name"
@@ -44,7 +48,7 @@ resource "restapi_object" "database" {
 }
 
 resource "restapi_object" "role" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/roles"
   id_attribute = "name"
@@ -60,7 +64,7 @@ resource "restapi_object" "role" {
 }
 
 resource "restapi_object" "role_member" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/roles/${local.database_owner}/members"
   id_attribute = "member"
@@ -81,7 +85,7 @@ resource "restapi_object" "role_member" {
 }
 
 resource "restapi_object" "schema_privileges" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/databases/${local.database_name}/schema_privileges"
   id_attribute = "role"
@@ -101,7 +105,7 @@ resource "restapi_object" "schema_privileges" {
 }
 
 resource "restapi_object" "default_grants" {
-  count = local.db_admin_v5 ? 1 : 0
+  count = local.is_v0_6 ? 1 : 0
 
   path         = "/roles/${local.username}/default_grants"
   id_attribute = "id"
