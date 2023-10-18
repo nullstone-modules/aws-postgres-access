@@ -1,3 +1,9 @@
+# 0.6.0 (Oct 13, 2023)
+* Use pg-db-admin v0.7.
+  * Switch to using `aws_lambda_invocation` instead of `restapi_object`.
+  * `restapi_object` is deprecated, it is used if the connecting postgres is using db-admin v0.6
+  * "legacy" configuration of db-admin is fully removed.
+
 # 0.5.5 (May 18, 2023)
 * Added support for interpolating `database_name` with `{{ NULLSTONE_STACK}}`, `{{ NULLSTONE_STACK}}`, and `{{ NULLSTONE_ENV }}`.
 * Added `server` to list of supported app categories.
