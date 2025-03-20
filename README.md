@@ -21,6 +21,14 @@ Do not run database migrations as the admin user of your postgres cluster.
 If you do, your database will be in a state where you will be unable to run database migrations on app startup.
 If you want to recover from this situation, keep reading.
 
+### Repair script
+
+This repo contains a script `./scripts/repair-ownership.sql` that will allow you to reassign ownership of db schema objects to the appropriate role.
+1. Change `current_owner` input variable to the current owner of db schema objects.
+2. Connect with credentials that have superuser access.
+3. Execute the script.
+4. Verify schema ownership looks correct as below.
+
 ### What should my configuration look like?
 
 After connecting to your cluster with `psql`, use the following commands to introspect your database.
