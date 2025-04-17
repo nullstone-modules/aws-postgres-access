@@ -1,3 +1,6 @@
+# 0.6.1 (Apr 17, 2025)
+* Eliminated problematic special characters from password generation.
+
 # 0.6.0 (Oct 13, 2023)
 * Use pg-db-admin v0.7.
   * Switch to using `aws_lambda_invocation` instead of `restapi_object`.
