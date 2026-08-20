@@ -1,3 +1,6 @@
+# 0.6.2 (Aug 20, 2026)
+* Added `var.username` to override the generated Postgres role name.
+
 # 0.6.1 (Apr 17, 2025)
 * Eliminated problematic special characters from password generation.
 
