@@ -1,3 +1,7 @@
+# 0.6.3 (Aug 28, 2026)
+* `var.username` now supports `{{ NULLSTONE_STACK }}`, `{{ NULLSTONE_BLOCK }}`, and `{{ NULLSTONE_ENV }}` interpolation.
+* `var.database_name` now resolves `{{ NULLSTONE_BLOCK }}` in addition to the existing `{{ NULLSTONE_APP }}`.
+
 # 0.6.2 (Aug 20, 2026)
 * Added `var.username` to override the generated Postgres role name.
 
