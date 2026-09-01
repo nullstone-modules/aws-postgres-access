@@ -51,26 +51,6 @@ resource "aws_lambda_invocation" "role" {
   })
 }
 
-// Re-verifies the role's password on every plan; pg-db-admin alters it only when a login attempt fails.
-// This heals a role created passwordless (e.g. by postgres-restore-access) or reset outside this
-// workspace -- the `role` invocation above only fires when its input changes, so it cannot.
-// A missing role fails the plan loudly; creating the role stays the job of the `role` invocation.
-data "aws_lambda_invocation" "ensure_role_password" {
-  count = local.is_v0_7 && local.db_admin_ensure_password ? 1 : 0
-
-  function_name = local.db_admin_func_name
-
-  input = jsonencode({
-    type = "ensure_role_password"
-    data = {
-      name     = local.username
-      password = random_password.this.result
-    }
-  })
-
-  depends_on = [aws_lambda_invocation.role]
-}
-
 resource "aws_lambda_invocation" "role_member" {
   count = local.is_v0_7 ? 1 : 0
 
